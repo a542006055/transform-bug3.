@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>此demo ios下看 会看到门和地面显示层在上面的bug 正常效果 看谷歌，</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,target-densitydpi=device-dpi,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta name="format-detection" content="telephone=no">
+	<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+	<meta http-equiv="Pragma" content="no-cache" />
+	<meta http-equiv="Expires" content="0" />
+
+
+	<style>
+	html{font-size:84.38px;}
+	html{height:100%;}
+	body,h1,h2,h3,p{font-family:Arial,Helvetica,sans-serif;margin:0;color:#fff;}
+	body{width:100%;height:100%;overflow:hidden;}
+	*{background-size:100% 100%;}
+	
+	.page4{width:100%;height:100%;position:absolute;left:0;top:0;}
+	.swiper-container{;height:100%;}
+	.swiper-wrapper{-webkit-overflow-scrolling:touch;height:100%;overflow: hidden;overflow-x: auto;}
+	.page4 .swiper-slide{ width:30.9rem;height: 100%;position: relative;background:#fff url(images/bg4.jpg)  no-repeat;background-size: 30.9rem auto;z-index:1;}
+	.page4 .wall2{background-image: url(images/wall2.png);width: 1.47rem;height: 3.38rem;position: absolute;left: 19.38rem;top:1.68rem;z-index:2}
+	.page4 .floor_line{background-image: url(images/floor_line.png);width: 12.09rem;height: 5.8rem;background-size: auto 5.8rem;z-index:2;
+		position: absolute;left: 11.4rem;top:4.62rem;}
+	.page4 .bgp4{background:url(images/bgp4.png); width:30.9rem;height: 100%;position: absolute;left:0;top:0;background-size: 30.9rem auto;z-index:200;z-index:3}
+
+	.aniwall2{-webkit-animation: aniwall2 5s infinite ease-in-out}
+	@-webkit-keyframes aniwall2 {
+		0%{-webkit-transform: translate(0,0);}
+		50% {-webkit-transform:translate(-100px,0);}
+		100% {-webkit-transform:translate(0,0);}
+	}
+
+	.anifloor_line{-webkit-animation: anifloor_line 3s infinite}
+	@-webkit-keyframes anifloor_line {
+	/*0%{left: 114px}
+	50% {left: 1px}
+	100% {left: 114px}*/
+	/*用这个left 也可解决问题 暂且没有更好的解法，主要导致原因是父级使用了-webkit-overflow-scrolling:touch  里面的absolute元素使用transform  ， index会变化 */
+	0%{-webkit-transform: translate3d(0,0,0);}
+	50% {-webkit-transform: translate3d(-400px,0,0);}
+	100% {-webkit-transform: translate3d(0,0,0);}
+}
+</style>
+</head>
+
+<body>
+	<section class="page4">
+		<div class="swiper-container">
+			<div class="swiper-wrapper ">
+				<div class="swiper-slide ">
+					<div class="floor_line anifloor_line"></div>
+					<span class="wall2 aniwall2"></span>
+					<div class="bgp4"></div>	
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+
+</html>
